@@ -35,12 +35,6 @@ export function Planet({
     fuelNeededToTravelTo > spaceship.tankCurrentAmountOfFuel;
 
   const hoverCardSide = isTheCurrentPlanet ? "bottom" : "top";
-  const travelButtonTitle = fuelToTravelToIsNotEnough
-    ? "You need more fuel to travel to here"
-    : "Travel here!";
-  const refuelButtonTitle = !isTheCurrentPlanet
-    ? "First travel to here and then refuel if needed"
-    : "Refuel here!";
 
   function handleOnOpenChange(open: boolean) {
     if (!isTheCurrentPlanet) setIsOpen(open);
@@ -101,7 +95,6 @@ export function Planet({
               <button
                 disabled={fuelToTravelToIsNotEnough}
                 className="bg-gray-500 disabled:opacity-30 text-white font-semibold py-2 px-4 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-                title={travelButtonTitle}
                 onClick={travelToPlanet}
               >
                 🚀 Travel here!
@@ -113,7 +106,6 @@ export function Planet({
               <button
                 className="bg-gray-500 disabled:opacity-30 text-white font-semibold py-2 px-4 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 disabled={refuelButtonDisabled}
-                title={refuelButtonTitle}
                 onClick={refuel}
               >
                 ⛽️ Refuel here!
