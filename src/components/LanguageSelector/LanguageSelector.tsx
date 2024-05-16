@@ -1,21 +1,22 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import { useLanguage } from "@latitude/i18n";
 
 type ILanguage = "pt-br" | "en-us";
 
 export function LanguageSelector() {
-  const [language, setLanguage] = useState<ILanguage>("en-us");
+  const { language, switchLanguage } = useLanguage();
 
   const handleSelect = (lang: ILanguage) => {
-    setLanguage(lang);
+    switchLanguage(lang === "en-us" ? "en" : "pt");
   };
 
   return (
     <div className="flex items-center space-x-4">
       <DropdownMenu.Root>
         <DropdownMenu.Trigger className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md">
-          {language.toUpperCase()}
+          {language === "en" ? "EN-US" : "PT-BR"}
         </DropdownMenu.Trigger>
         <DropdownMenu.Content className="mt-2 bg-white border border-gray-200 rounded-md shadow-lg">
           <DropdownMenu.Item

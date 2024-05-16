@@ -3,6 +3,7 @@ import { useState } from "react";
 import * as HoverCard from "@radix-ui/react-hover-card";
 import clsx from "clsx";
 import { IPlanet, ISpaceship } from "@latitude/types";
+import { useLanguage } from "@latitude/i18n";
 
 export interface PlanetProps extends IPlanet {
   orbitSize: number;
@@ -24,7 +25,10 @@ export function Planet({
   refuel,
   spaceship,
 }: PlanetProps) {
+  const { translate } = useLanguage();
   const [isOpen, setIsOpen] = useState(isTheCurrentPlanet);
+
+  const needsFuel = fuelNeededToTravelTo > 0;
 
   const isSpaceshipFuelFull =
     spaceship.tankCurrentAmountOfFuel === spaceship.tankCapacity;
@@ -68,28 +72,39 @@ export function Planet({
           side={hoverCardSide}
           align={"center"}
         >
-          <div className="w-full text-center capitalize">[{name}]</div>
+          <div className="w-full text-center capitalize">
+            [{translate(name)}]
+          </div>
           {isTheCurrentPlanet && (
-            <div className="text-green-500">You are here!</div>
+            <div className="text-green-500">{translate("current")}</div>
           )}
           {isTheCurrentPlanet && (
             <div className="text-blue-500">
-              Nearest planet to refuel:{" "}
+              {translate("nearest_refuel")}
               <span className="capitalize">
-                {spaceship.nearestPlanetToRefuel}
+                {translate(spaceship.nearestPlanetToRefuel)}
               </span>
             </div>
           )}
+          {!isTheCurrentPlanet && (
+            <div>
+              {translate("distance")}
+              {distanceFromSpaceship.toLocaleString()}
+              {translate("kilometers")}
+            </div>
+          )}
           <div>
-            Distance: {distanceFromSpaceship.toLocaleString()} kilometers
+            {translate("remaining_fuel")}
+            {spaceship.tankCurrentAmountOfFuel.toLocaleString()}
+            {translate("liters")}
           </div>
-          <div>
-            Remaining fuel: {spaceship.tankCurrentAmountOfFuel.toLocaleString()}{" "}
-            liters
-          </div>
-          <div className={clsx(fuelToTravelToIsNotEnough && "text-red-600")}>
-            Fuel needed: {fuelNeededToTravelTo.toLocaleString()} liters
-          </div>
+          {needsFuel && (
+            <div className={clsx(fuelToTravelToIsNotEnough && "text-red-600")}>
+              {translate("fuel_needed")}
+              {fuelNeededToTravelTo.toLocaleString()}
+              {translate("liters")}
+            </div>
+          )}
           {!isTheCurrentPlanet && (
             <div className="w-full flex items-center justify-center">
               <button
@@ -97,7 +112,7 @@ export function Planet({
                 className="bg-gray-500 disabled:opacity-30 text-white font-semibold py-2 px-4 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 onClick={travelToPlanet}
               >
-                🚀 Travel here!
+                {translate("travel_button")}
               </button>
             </div>
           )}
@@ -108,7 +123,7 @@ export function Planet({
                 disabled={refuelButtonDisabled}
                 onClick={refuel}
               >
-                ⛽️ Refuel here!
+                {translate("refuel_button")}
               </button>
             </div>
           )}

@@ -22,5 +22,5 @@ export interface ISpaceship {
   tankCapacity: number;
   tankCurrentAmountOfFuel: number;
   comsumptionRatio: number;
-  nearestPlanetToRefuel: string;
+  nearestPlanetToRefuel: IPlanetNames;
 }

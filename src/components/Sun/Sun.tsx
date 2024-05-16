@@ -1,7 +1,10 @@
 "use client";
+import { useLanguage } from "@latitude/i18n";
 import * as HoverCard from "@radix-ui/react-hover-card";
 
 export function Sun() {
+  const { translate } = useLanguage();
+
   return (
     <HoverCard.Root>
       <HoverCard.Trigger asChild>
@@ -14,10 +17,10 @@ export function Sun() {
           side="top"
           align="center"
         >
-          <div className="w-full text-center capitalize">[Sun]</div>
-          <div className="text-center">
-            ⚠️ It is too hot for you here! ⚠️
-          </div>{" "}
+          <div className="w-full text-center capitalize">
+            [{translate("sun")}]
+          </div>
+          <div className="text-center">{translate("too_hot")}</div>
           <HoverCard.Arrow className="fill-white" />
         </HoverCard.Content>
       </HoverCard.Portal>
