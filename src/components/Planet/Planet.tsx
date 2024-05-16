@@ -8,8 +8,8 @@ import { useLanguage } from "@latitude/i18n";
 export interface PlanetProps extends IPlanet {
   orbitSize: number;
   spaceship: ISpaceship;
-  travelToPlanet: () => void;
-  refuel: () => void;
+  onTravelToPlanet: () => void;
+  onRefuel: () => void;
 }
 
 export function Planet({
@@ -21,8 +21,8 @@ export function Planet({
   distanceFromSpaceship,
   fuelNeededToTravelTo,
   orbitSize,
-  travelToPlanet,
-  refuel,
+  onTravelToPlanet,
+  onRefuel,
   spaceship,
 }: PlanetProps) {
   const { translate } = useLanguage();
@@ -110,7 +110,7 @@ export function Planet({
               <button
                 disabled={fuelToTravelToIsNotEnough}
                 className="bg-gray-500 disabled:opacity-30 text-white font-semibold py-2 px-4 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-                onClick={travelToPlanet}
+                onClick={onTravelToPlanet}
               >
                 {translate("travel_button")}
               </button>
@@ -121,7 +121,7 @@ export function Planet({
               <button
                 className="bg-gray-500 disabled:opacity-30 text-white font-semibold py-2 px-4 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 disabled={refuelButtonDisabled}
-                onClick={refuel}
+                onClick={onRefuel}
               >
                 {translate("refuel_button")}
               </button>

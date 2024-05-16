@@ -5,16 +5,16 @@ interface OrbitProps {
   size: number;
   planet: IPlanet;
   spaceship: ISpaceship;
-  travelToPlanet: () => void;
-  refuel: () => void;
+  onTravelToPlanet: () => void;
+  onRefuel: () => void;
 }
 
 export function Orbit({
   size,
   planet,
   spaceship,
-  travelToPlanet,
-  refuel,
+  onTravelToPlanet,
+  onRefuel,
 }: OrbitProps) {
   return (
     <>
@@ -29,8 +29,8 @@ export function Orbit({
         {...planet}
         orbitSize={size}
         spaceship={spaceship}
-        travelToPlanet={travelToPlanet}
-        refuel={refuel}
+        onTravelToPlanet={onTravelToPlanet}
+        onRefuel={onRefuel}
       />
     </>
   );
