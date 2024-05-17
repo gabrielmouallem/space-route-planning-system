@@ -39,11 +39,120 @@ The user interface is built with reusable components styled using Tailwind CSS. 
 
 **File Path**: `src/components/LanguageSelector/LanguageSelector.tsx`
 
-#### 5. Route and Fuel Calculation
+### 5. Route and Fuel Calculation
 
-The `calculateFuel` function computes the required fuel based on the distance between planets and the ship's fuel consumption ratio.
+The logic to calculate the required fuel is based on the distance between planets and the spaceship's fuel consumption ratio. The distances between planets are defined in a constant object `PLANET_DISTANCES`. The fuel needed for a trip is calculated by multiplying the distance by the spaceship's fuel consumption ratio.
 
-**File Path**: `src/contexts/spaceNavigationContext/spaceNavigationContext.utils.ts`
+**PLANET_DISTANCES Constant**:
+```typescript
+export const PLANET_DISTANCES: Record<
+  IPlanetNames,
+  Record<IPlanetNames, number>
+> = {
+  mercury: {
+    mercury: 0,
+    venus: 50_000_000,
+    earth: 90_000_000,
+    mars: 140_000_000,
+    jupiter: 490_000_000,
+    saturn: 1_190_000_000,
+    uranus: 2_090_000_000,
+    neptune: 2_790_000_000,
+  },
+  venus: {
+    mercury: 50_000_000,
+    venus: 0,
+    earth: 40_000_000,
+    mars: 100_000_000,
+    jupiter: 440_000_000,
+    saturn: 1_140_000_000,
+    uranus: 2_040_000_000,
+    neptune: 2_740_000_000,
+  },
+  earth: {
+    mercury: 90_000_000,
+    venus: 40_000_000,
+    earth: 0,
+    mars: 60_000_000,
+    jupiter: 410_000_000,
+    saturn: 1_110_000_000,
+    uranus: 2_010_000_000,
+    neptune: 2_710_000_000,
+  },
+  mars: {
+    mercury: 140_000_000,
+    venus: 100_000_000,
+    earth: 60_000_000,
+    mars: 0,
+    jupiter: 350_000_000,
+    saturn: 1_050_000_000,
+    uranus: 1_950_000_000,
+    neptune: 2_650_000_000,
+  },
+  jupiter: {
+    mercury: 490_000_000,
+    venus: 440_000_000,
+    earth: 410_000_000,
+    mars: 350_000_000,
+    jupiter: 0,
+    saturn: 700_000_000,
+    uranus: 1_600_000_000,
+    neptune: 2_300_000_000,
+  },
+  saturn: {
+    mercury: 1_190_000_000,
+    venus: 1_140_000_000,
+    earth: 1_110_000_000,
+    mars: 1_050_000_000,
+    jupiter: 700_000_000,
+    saturn: 0,
+    uranus: 900_000_000,
+    neptune: 1_600_000_000,
+  },
+  uranus: {
+    mercury: 2_090_000_000,
+    venus: 2_040_000_000,
+    earth: 2_010_000_000,
+    mars: 1_950_000_000,
+    jupiter: 1_600_000_000,
+    saturn: 900_000_000,
+    uranus: 0,
+    neptune: 700_000_000,
+  },
+  neptune: {
+    mercury: 2_790_000_000,
+    venus: 2_740_000_000,
+    earth: 2_710_000_000,
+    mars: 2_650_000_000,
+    jupiter: 2_300_000_000,
+    saturn: 1_600_000_000,
+    uranus: 700_000_000,
+    neptune: 0,
+  },
+};
+```
+
+**Explanation**:
+- `PLANET_DISTANCES`: A constant that holds the distances (in kilometers) between each pair of planets.
+- Each planet has an entry with the distances to all other planets. For example, the distance from Mercury to Venus is 50,000,000 kilometers, while the distance from Earth to Mars is 60,000,000 kilometers.
+
+**Fuel Calculation**:
+To determine the fuel needed to travel between planets, the distance is multiplied by the spaceship's fuel consumption ratio.
+
+**Example Calculation**:
+```typescript
+const distanceFromSpaceship = PLANET_DISTANCES[currentPlanet][planet.name];
+const fuelNeededToTravelTo = distanceFromSpaceship * 0.0001;
+```
+
+**Explanation**:
+- `currentPlanet`: The planet where the spaceship is currently located.
+- `planet.name`: The name of the target planet to which the spaceship intends to travel.
+- `distanceFromSpaceship`: The distance from the current planet to the target planet, retrieved from the `PLANET_DISTANCES` constant.
+- `fuelNeededToTravelTo`: The fuel required to travel from the current planet to the target planet, calculated by multiplying the distance by the spaceship's fuel consumption ratio (`0.0001` in this example).
+
+**Fuel Consumption Ratio**:
+- The fuel consumption ratio (`0.0001`) is a constant that represents the amount of fuel consumed per kilometer traveled. This ratio is used to convert the distance into the fuel required for the trip. For example, if the distance to the target planet is 50,000,000 kilometers, the fuel needed would be `50,000,000 * 0.0001 = 5000` liters of fuel.
 
 #### 6. Multilingual Support
 
