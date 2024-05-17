@@ -56,7 +56,6 @@ export function Planet({
           className={clsx(
             "absolute z-[2]",
             color,
-            isTheCurrentPlanet && "animate-pulse",
             isTheCurrentPlanet && "border-4 border-green-500",
             fuelToTravelToIsNotEnough
               ? "hover:border-red-600"
@@ -67,7 +66,7 @@ export function Planet({
       </HoverCard.Trigger>
       <HoverCard.Portal>
         <HoverCard.Content
-          className="w-fit z-[3] flex flex-col gap-4 shadow-neutral-950 shadow-lg data-[side=bottom]:animate-slideUpAndFade data-[side=right]:animate-slideLeftAndFade data-[side=left]:animate-slideRightAndFade data-[side=top]:animate-slideDownAndFade rounded-md bg-neutral-900 p-5 shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] data-[state=open]:transition-all"
+          className="w-fit z-[3] flex flex-col gap-4 shadow-neutral-950 shadow-lg data-[side=bottom]:animate-slideUpAndFade data-[side=right]:animate-slideLeftAndFade data-[side=left]:animate-slideRightAndFade data-[side=top]:animate-slideDownAndFade rounded-md bg-neutral-900 p-5 data-[state=open]:transition-all"
           sideOffset={15}
           side={hoverCardSide}
           align={"center"}
