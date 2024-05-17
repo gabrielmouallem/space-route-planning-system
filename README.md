@@ -29,7 +29,7 @@ src/
 
 The application state is managed using the Context API. The `spaceNavigationContext.tsx` file defines the state and actions for managing the spaceship's and planets' states. The `useSpaceNavigation` hook is used to access and manipulate this state within the application.
 
-**File Path**: `src/contexts/spaceNavigationContext.tsx`
+**File Path**: `src/contexts/spaceNavigationContext/spaceNavigationContext.tsx`
 
 #### 4. User Interface
 
@@ -37,13 +37,13 @@ The user interface is built with reusable components styled using Tailwind CSS. 
 
 **Example Component**: LanguageSelector
 
-**File Path**: `src/components/LanguageSelector.tsx`
+**File Path**: `src/components/LanguageSelector/LanguageSelector.tsx`
 
 #### 5. Route and Fuel Calculation
 
 The `calculateFuel` function computes the required fuel based on the distance between planets and the ship's fuel consumption ratio.
 
-**File Path**: `src/utils/spaceNavigationUtils.ts`
+**File Path**: `src/contexts/spaceNavigationContext/spaceNavigationContext.utils.ts`
 
 #### 6. Multilingual Support
 
@@ -61,7 +61,7 @@ Unit and integration tests are written using Jest and React Testing Library. The
 
 **Example Test**: Planet Component Tests
 
-**File Path**: `src/tests/Planet.test.tsx`
+**File Path**: `src/components/Planet/Planet.test.tsx`
 
 #### 8. UI Usability and Interaction Flow
 
