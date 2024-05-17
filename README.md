@@ -2,7 +2,7 @@
 
 #### 1. Introduction
 
-The Space Route Planning System is designed to assist astronauts in planning interplanetary trips, simulating fuel requirements, and identifying refueling points. The application is built using React and Next.js, styled with Tailwind CSS, and supports multiple languages through react-i18next.
+The Space Route Planning System is designed to assist astronauts in planning interplanetary trips, simulating fuel requirements, and identifying refueling points. The application is built using React and Next.js, styled with Tailwind CSS, and supports multiple languages through a custom i18n system.
 
 ![Space Route Planning System UI](space-route-planning-system-ui.png)
 
